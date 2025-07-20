@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>るんちょまの『教えて下さい、お人間さん』</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700&display=swap" rel="stylesheet">
+    
 </head>
 <body>
     <div class="container">
@@ -51,11 +51,16 @@
             </section>
         </main>
         <footer>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSc_P_G_X_Y_Z_A_B_C_D_E_F_G/viewform?usp=sf_link" id="report-link" target="_blank">問題点を報告する</a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSf5d4vTg5Ib6zCdlOGhrIM6d14bDy1kebo5TXVXRBNGc3OLwA/viewform?usp=header" id="report-link" target="_blank">問題点を報告する</a>
+            <button id="btn-show-readme">遊び方</button>
             <button id="dark-mode-toggle">🌙</button>
         </footer>
     </div>
 
-    <script type="module" src="main.js"></script>
+    <div id="readme-display-area" style="display:none;">
+        <!-- README.md の内容がここに読み込まれます -->
+    </div>
+
+    <script type="module" src="./gameCore.js"></script>
 </body>
 </html>
