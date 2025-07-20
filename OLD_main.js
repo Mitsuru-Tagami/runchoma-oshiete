@@ -146,7 +146,7 @@ function findNextQuestion() {
             }
 
             let match = false;
-            if (Array.isArray(charValue)) {
+            if (ArrayValue) {
                 if (charValue.includes(question.yesValue)) {
                     match = true;
                 }
@@ -294,7 +294,7 @@ function promptForAnswer() {
     candidateSelectionArea.style.display = 'none';
     inputAnswerArea.style.display = 'flex'; // 入力エリアを表示
     userAnswerInput.style.display = 'block'; // 入力フィールドを表示
-    btnSubmitAnswer.style.display = 'block'; // 送信ボタンを表示
+    btnSubmitAnswer.style.display = 'block'; // 送信ボタンは表示
     btnRestartGame.style.display = 'block'; // リスタートボタンを表示
     setButtonsEnabled(true); // Allow input
     btnSubmitAnswer.disabled = false;
@@ -474,7 +474,8 @@ function handleAnswer(answer) {
             console.log(`アイテム: ${item.name}, 特性(${currentQuestion.characteristic}): ${charValue}, 現在のスコア: ${item.score}`);
 
             if (charValue === undefined || charValue === null || charValue === "不明" || (Array.isArray(charValue) && charValue.length === 0)) {
-                console.log(`特性が不明または空のため、スコア変動なし。`);
+                // 特性が不明なアイテムは「分からない」として扱う
+                console.log(`特性が不明または空のため、「分からない」として処理。`);
                 return;
             }
 
@@ -501,7 +502,8 @@ function handleAnswer(answer) {
                     } else { // answer === 'no'
                         if (typeof questionNoValue === 'function') {
                             match = questionNoValue(charValue);
-                        } else {
+                        }
+                        else {
                             match = (charValue !== questionYesValue);
                         }
                     }
@@ -514,9 +516,6 @@ function handleAnswer(answer) {
                     item.score -= 1;
                     console.log(`スコア -1: ${item.name} (新スコア: ${item.score})`);
                 }
-            } else { // answer === 'unknown' の場合
-                // スコアを変動させない
-                console.log(`「分からない」のため、スコア変動なし。`);
             }
         });
 
@@ -551,7 +550,8 @@ function handleAnswer(answer) {
 
 // 最初の質問のハンドラ
 function handleInitialAnswer(type) {
-    console.log(`--- handleInitialAnswer 開始 (タイプ: ${type}) ---`);
+    console.log(`--- handleInitialAnswer 開始 (タイプ: ${type}) ---
+`);
     if (isProcessing) {
         console.log("処理中のため、handleInitialAnswerをスキップ。");
         return;
