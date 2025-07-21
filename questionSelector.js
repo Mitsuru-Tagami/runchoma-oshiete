@@ -238,47 +238,56 @@ const sequentialQuestions = [
         characteristic: "purpose",
         yesValue: "買い物",
         noValue: (val) => !val.includes("買い物")
-    },
-    {
-        text: "お人間さん。それは絵本ですか？",
-        characteristic: "book_type",
-        yesValue: "絵本",
-        noValue: (val) => val !== "絵本"
-    },
-    {
-        text: "お人間さん。それは児童書ですか？",
-        characteristic: "book_type",
-        yesValue: "児童書",
-        noValue: (val) => val !== "児童書"
-    },
-    {
-        text: "お人間さん。それは漫画ですか？",
-        characteristic: "book_type",
-        yesValue: "漫画",
-        noValue: (val) => val !== "漫画"
-    },
-    {
-        text: "お人間さん。それは小説ですか？",
-        characteristic: "book_type",
-        yesValue: "小説",
-        noValue: (val) => val !== "小説"
-    },
-    {
-        text: "お人間さん。それは参考書ですか？",
-        characteristic: "book_type",
-        yesValue: "参考書",
-        noValue: (val) => val !== "参考書"
-    },
-    {
-        text: "お人間さん。それは専門書ですか？",
-        characteristic: "book_type",
-        yesValue: "専門書",
-        noValue: (val) => val !== "専門書"
     }
 ];
 
+const contextualQuestions = {
+    category: {
+        "本": [
+            {
+                text: "お人間さん。それは絵本ですか？",
+                characteristic: "book_type",
+                yesValue: "絵本",
+                noValue: (val) => val !== "絵本"
+            },
+            {
+                text: "お人間さん。それは児童書ですか？",
+                characteristic: "book_type",
+                yesValue: "児童書",
+                noValue: (val) => val !== "児童書"
+            },
+            {
+                text: "お人間さん。それは漫画ですか？",
+                characteristic: "book_type",
+                yesValue: "漫画",
+                noValue: (val) => val !== "漫画"
+            },
+            {
+                text: "お人間さん。それは小説ですか？",
+                characteristic: "book_type",
+                yesValue: "小説",
+                noValue: (val) => val !== "小説"
+            },
+            {
+                text: "お人間さん。それは参考書ですか？",
+                characteristic: "book_type",
+                yesValue: "参考書",
+                noValue: (val) => val !== "参考書"
+            },
+            {
+                text: "お人間さん。それは専門書ですか？",
+                characteristic: "book_type",
+                yesValue: "専門書",
+                noValue: (val) => val !== "専門書"
+            }
+        ]
+    }
+};
+
 let usedRandomQuestionIndices = new Set();
 let usedSequentialQuestionIndex = 0;
+let usedContextualQuestionIndices = new Set();
+let currentContext = null;
 
 function findRandomQuestion(activeItems) {
     const availableQuestions = randomQuestions.filter((_, index) => !usedRandomQuestionIndices.has(index));
@@ -360,6 +369,26 @@ function findSequentialQuestion(activeItems) {
     return question;
 }
 
+function findContextualQuestion(activeItems) {
+    if (!currentContext || !contextualQuestions[currentContext.key] || !contextualQuestions[currentContext.key][currentContext.value]) {
+        return null;
+    }
+
+    const questions = contextualQuestions[currentContext.key][currentContext.value];
+    const availableQuestions = questions.filter((_, index) => !usedContextualQuestionIndices.has(index));
+
+    if (availableQuestions.length === 0) {
+        return null;
+    }
+
+    // For now, just return the next available question. Could be improved with entropy later.
+    const nextQuestion = availableQuestions[0];
+    const originalIndex = questions.indexOf(nextQuestion);
+    usedContextualQuestionIndices.add(originalIndex);
+    console.log(`次のコンテキスト質問が見つかりました: 「${nextQuestion.text}」`);
+    return nextQuestion;
+}
+
 export function findNextQuestion(activeItems, currentQuestionPhase) {
     console.log(`--- findNextQuestion 開始 (フェーズ: ${currentQuestionPhase}) ---`);
 
@@ -367,11 +396,28 @@ export function findNextQuestion(activeItems, currentQuestionPhase) {
         return findRandomQuestion(activeItems);
     } else if (currentQuestionPhase === 'SEQUENTIAL_PHASE') {
         return findSequentialQuestion(activeItems);
+    } else if (currentQuestionPhase === 'CONTEXTUAL_PHASE') {
+        return findContextualQuestion(activeItems);
     }
     return null;
 }
 
+export function getSpecificQuestions(characteristic, value) {
+    if (contextualQuestions[characteristic] && contextualQuestions[characteristic][value]) {
+        return contextualQuestions[characteristic][value];
+    }
+    return [];
+}
+
+export function setCurrentContext(key, value) {
+    currentContext = { key, value };
+    usedContextualQuestionIndices.clear(); // 新しいコンテキストになったらリセット
+}
+
+
 export function resetUsedQuestions() {
     usedRandomQuestionIndices = new Set();
     usedSequentialQuestionIndex = 0;
+    usedContextualQuestionIndices = new Set();
+    currentContext = null;
 }
