@@ -35,3 +35,13 @@
 ## ライセンス
 
 本プロジェクトは二次創作であり、にじさんじプロジェクトとは一切関係ありません。
+
+## 公開ページ
+
+本プロジェクトの公開ページはこちらです：
+https://mitsuru-tagami.github.io/runchoma-oshiete/
+
+## 連絡先
+
+ご意見・ご連絡は以下までお願いします：
+mitsuru-tagami@island.dti.ne.jp
