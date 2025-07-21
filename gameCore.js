@@ -1,5 +1,5 @@
 import { loadItemsFromLocalStorage, getActiveItems, setActiveItems, addNewItem } from './dataManager.js';
-import { findNextQuestion, resetUsedQuestions } from './questionSelector.js';
+import { findNextQuestion, resetUsedQuestions, setCurrentContext, getSpecificQuestions } from './questionSelector.js';
 import { uiElements, setupInitialUI, askQuestion, displayCandidates, showAkinatorLink, promptForAnswer, handleSubmitAnswer, toggleDarkMode } from './ui.js';
 import { setButtonsEnabled, restartGame } from './utils.js';
 
@@ -8,6 +8,7 @@ export const QUESTION_PHASES = {
     INITIAL: 'INITIAL_PHASE',
     RANDOM: 'RANDOM_PHASE',
     SEQUENTIAL: 'SEQUENTIAL_PHASE',
+    CONTEXTUAL: 'CONTEXTUAL_PHASE', // 新しいフェーズを追加
     CANDIDATE: 'CANDIDATE_PHASE',
     LEARNING: 'LEARNING_PHASE'
 };
@@ -85,10 +86,17 @@ export function handleAnswer(answer) {
                 } else {
                     item.score -= 1;
                     console.log(`スコア -1: ${item.name} (新スコア: ${item.score})`);
-                }
+                } 
             }
         });
         setActiveItems(activeItems);
+
+        // --- コンテキスト切り替え処理 ---
+        if (answer === 'yes' && getSpecificQuestions(gameState.currentQuestion.characteristic, gameState.currentQuestion.yesValue).length > 0) {
+            console.log(`コンテキストを「${gameState.currentQuestion.characteristic}: ${gameState.currentQuestion.yesValue}」に設定します。`);
+            setCurrentContext(gameState.currentQuestion.characteristic, gameState.currentQuestion.yesValue);
+            gameState.currentQuestionPhase = QUESTION_PHASES.CONTEXTUAL;
+        }
 
         gameState.questionCount++;
 
@@ -110,8 +118,16 @@ export function handleAnswer(answer) {
         if (gameState.currentQuestion) {
             askQuestion(gameState.currentQuestion.text, (enabled, elements) => setButtonsEnabled(enabled, elements), setProcessing);
         } else {
-            gameState.currentQuestionPhase = QUESTION_PHASES.CANDIDATE;
-            displayCandidates(getActiveItems(), (enabled, elements) => setButtonsEnabled(enabled, elements), setProcessing, promptForAnswer, gameState);
+            // コンテキスト質問が尽きたら、シーケンシャルフェーズに戻るなど、次のロジックを考える
+            console.log("現在のフェーズの質問が尽きました。シーケンシャルフェーズに移行します。");
+            gameState.currentQuestionPhase = QUESTION_PHASES.SEQUENTIAL;
+            gameState.currentQuestion = findNextQuestion(getActiveItems(), gameState.currentQuestionPhase);
+            if (gameState.currentQuestion) {
+                askQuestion(gameState.currentQuestion.text, (enabled, elements) => setButtonsEnabled(enabled, elements), setProcessing);
+            } else {
+                gameState.currentQuestionPhase = QUESTION_PHASES.CANDIDATE;
+                displayCandidates(getActiveItems(), (enabled, elements) => setButtonsEnabled(enabled, elements), setProcessing, promptForAnswer, gameState);
+            }
         }
 
     } catch (error) {
