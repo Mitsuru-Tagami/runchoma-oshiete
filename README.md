@@ -26,11 +26,37 @@
 -   `questionSelector.js`: 質問選択ロジックを記述するJavaScriptファイル。
 -   `utils.js`: 汎用的なヘルパー関数を記述するJavaScriptファイル。
 -   `data.js`: 特定対象となるモノやサービスのデータが定義されています。
--   `TASK_LIST.md`: 開発の進捗状況とタスクリスト。
 
-### 動作確認
+### 今後のDB利用方針
 
-`index.html` をWebブラウザで開くことで、アプリケーションを動作させることができます。
+- 現在はDBを利用していませんが、将来的にGoogleスプレッドシートを簡易DBとして利用する可能性があります。
+
+### 開発環境・クローン方法
+
+1. GitHubリポジトリをクローン：
+   ```
+   git clone https://github.com/Mitsuru-Tagami/runchoma-oshiete.git
+   ```
+2. VS Codeなどのエディタで開き、`index.html` をブラウザで開くと動作確認できます。
+
+### プルリクエストの流れ
+
+1. 新しいブランチを作成：
+   ```
+   git checkout -b feature/your-feature-name
+   ```
+2. 変更をコミット：
+   ```
+   git add .
+   git commit -m "feat: 変更内容の説明"
+   ```
+3. GitHubにプッシュ：
+   ```
+   git push origin feature/your-feature-name
+   ```
+4. GitHub上でPull Requestを作成し、レビューを依頼してください。
+
+---
 
 ## ライセンス
 
