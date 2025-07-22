@@ -94,7 +94,13 @@ export function handleAnswer(answer) {
         setActiveItems(activeItems);
 
         // --- コンテキスト切り替え処理 ---
-        if (answer === 'yes' && gameState.currentQuestion.characteristic === 'category' && gameState.currentQuestion.yesValue === '生き物') {
+        if (
+            answer === 'yes' &&
+            (
+                (gameState.currentQuestion.characteristic === 'category' && gameState.currentQuestion.yesValue === '生き物') ||
+                (gameState.currentQuestion.characteristic === 'living' && yesMeansLivingIsAnimal(gameState.currentQuestion))
+            )
+        ) {
             console.log(`コンテキストを「category: 生き物」に設定します。`);
             setCurrentContext('category', '生き物');
             gameState.currentQuestionPhase = QUESTION_PHASES.CONTEXTUAL;
@@ -360,4 +366,10 @@ function initializeGame() {
 // DOMが読み込まれたらゲームを初期化
 if (typeof document !== 'undefined') {
     document.addEventListener('DOMContentLoaded', initializeGame);
+}
+
+// living特性の「生き物ですか？」が生き物判定かどうか
+function yesMeansLivingIsAnimal(question) {
+    // 「生き物ですか？」の質問文や特性名で判定
+    return question.characteristic === 'living' && (question.text.includes('生き物') || question.yesValue === 'はい');
 }
