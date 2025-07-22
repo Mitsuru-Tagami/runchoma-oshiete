@@ -59,7 +59,7 @@ header h1 {
     font-size: 1.1em;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease;
-    flex: 1 1 auto; /* 柔軟な幅設定 */
+    flex: 1; /* 柔軟な幅設定 */
     min-width: 150px; /* 最小幅を設定 */
 }
 
