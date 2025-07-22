@@ -298,6 +298,26 @@ const contextualQuestions = {
                 yesValue: "専門書",
                 noValue: (val) => val !== "専門書"
             }
+        ],
+        "生き物": [
+            {
+                text: "お人間さん。それはペットですか？",
+                characteristic: "purpose",
+                yesValue: "ペット",
+                noValue: (val) => !val.includes("ペット")
+            },
+            {
+                text: "お人間さん。それは四足歩行ですか？",
+                characteristic: "other_features",
+                yesValue: "四足歩行",
+                noValue: (val) => !val.includes("四足歩行")
+            },
+            {
+                text: "お人間さん。それは鳴きますか？",
+                characteristic: "other_features",
+                yesValue: "鳴く",
+                noValue: (val) => !val.includes("鳴く")
+            }
         ]
     }
 };
