@@ -94,7 +94,11 @@ export function handleAnswer(answer) {
         setActiveItems(activeItems);
 
         // --- コンテキスト切り替え処理 ---
-        if (answer === 'yes' && getSpecificQuestions(gameState.currentQuestion.characteristic, gameState.currentQuestion.yesValue).length > 0) {
+        if (answer === 'yes' && gameState.currentQuestion.characteristic === 'category' && gameState.currentQuestion.yesValue === '生き物') {
+            console.log(`コンテキストを「category: 生き物」に設定します。`);
+            setCurrentContext('category', '生き物');
+            gameState.currentQuestionPhase = QUESTION_PHASES.CONTEXTUAL;
+        } else if (answer === 'yes' && getSpecificQuestions(gameState.currentQuestion.characteristic, gameState.currentQuestion.yesValue).length > 0) {
             console.log(`コンテキストを「${gameState.currentQuestion.characteristic}: ${gameState.currentQuestion.yesValue}」に設定します。`);
             setCurrentContext(gameState.currentQuestion.characteristic, gameState.currentQuestion.yesValue);
             gameState.currentQuestionPhase = QUESTION_PHASES.CONTEXTUAL;
