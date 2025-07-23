@@ -28,8 +28,6 @@
 -   `questionSelector.js`: 質問選択ロジックを記述するJavaScriptファイル。
 -   `utils.js`: 汎用的なヘルパー関数を記述するJavaScriptファイル。
 -   `data.js`: 特定対象となるモノやサービスのデータが定義されています。
-<<<<<<< HEAD
-=======
 -   `docs/`: 各種ドキュメントを格納するディレクトリ。
     -   `るんちょまの教えて下さい_仕様書.md`: 本プロジェクトの詳細な仕様書。
     -   `TASK_LIST.md`: 開発タスクリスト。
@@ -38,7 +36,6 @@
     -   `20250723_goroku_checker_research.md`: 語録チェッカー調査結果。
     -   `20250723_moderation_guideline_draft.md`: 運用ガイドラインドラフト。
 -   `logs/`: 作業ログを格納するディレクトリ。
->>>>>>> main
 
 ### 今後のDB利用方針
 
