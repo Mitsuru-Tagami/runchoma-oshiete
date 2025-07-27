@@ -133,6 +133,12 @@ const randomQuestions = [
         characteristic: "other_features",
         yesValue: "鳴く",
         noValue: (val) => !val.includes("鳴く")
+    },
+    {
+        text: "お人間さん。それは施設や建物さんですか？",
+        characteristic: "category",
+        yesValue: "施設",
+        noValue: (val) => !val.includes("施設")
     }
 ];
 
