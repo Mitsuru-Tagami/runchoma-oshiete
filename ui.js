@@ -100,7 +100,7 @@ export function showAkinatorLink() {
 
 // 初期画面表示
 export function setupInitialUI() {
-    uiElements.messageElement.textContent = "お人間さん。お探しのお品さんは、モノですか？　サービスですか？　それとも人物やキャラさんですか？";
+    uiElements.messageElement.textContent = "お人間さん。何か形あるモノですか？　それとも形のない概念やサービスでしょうか？　それとも人物やキャラさんですか？";
     uiElements.initialSelectionButtons.style.display = 'grid';
     uiElements.mainQuestionButtons.style.display = 'none';
     uiElements.candidateSelectionArea.style.display = 'none';
