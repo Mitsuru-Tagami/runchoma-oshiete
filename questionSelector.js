@@ -3,6 +3,12 @@ import { calculateEntropy } from './utils.js';
 // 質問の定義
 const randomQuestions = [
     {
+        text: "お人間さん。それは生き物さんですか？",
+        characteristic: "living",
+        yesValue: "はい",
+        noValue: "いいえ"
+    },
+    {
         text: "お人間さん。それは施設や建物さんですか？",
         characteristic: "category",
         yesValue: "施設",
@@ -14,139 +20,6 @@ const randomQuestions = [
         yesValue: "本を借りる",
         noValue: (val) => !val.includes("本を借りる")
     },
-    {
-        text: "お人間さん。それは乗り物さんですか？",
-        characteristic: "category",
-        yesValue: "乗り物",
-        noValue: (val) => !val.includes("乗り物")
-    },
-    {
-        text: "お人間さん。それは電気で動きますか？",
-        characteristic: "power_source",
-        yesValue: "電気",
-        noValue: (val) => val !== "電気"
-    },
-    {
-        text: "お人間さん。それは食べ物さんですか？",
-        characteristic: "category",
-        yesValue: "食べ物",
-        noValue: (val) => !val.includes("食べ物")
-    },
-    {
-        text: "お人間さん。それはドアがありますか？",
-        characteristic: "other_features",
-        yesValue: "ドアがある",
-        noValue: (val) => !val.includes("ドアがある")
-    },
-    {
-        text: "お人間さん。それは四角い形をしていますか？",
-        characteristic: "other_features",
-        yesValue: "四角い",
-        noValue: (val) => !val.includes("四角い")
-    },
-    {
-        text: "お人間さん。それはプレゼントと関係がありますか？",
-        characteristic: "other_features",
-        yesValue: "プレゼント",
-        noValue: (val) => !val.includes("プレゼント")
-    },
-    {
-        text: "お人間さん。それは車輪がありますか？",
-        characteristic: "wheels",
-        yesValue: "はい",
-        noValue: "いいえ"
-    },
-    {
-        text: "お人間さん。それは現実世界で利用するサービスですか？",
-        characteristic: "other_features",
-        yesValue: "現実世界で利用",
-        noValue: (val) => !val.includes("現実世界で利用")
-    },
-    {
-        text: "お人間さん。それはキャラクターが登場するサービスですか？",
-        characteristic: "other_features",
-        yesValue: "キャラクター登場",
-        noValue: (val) => !val.includes("キャラクター登場")
-    },
-    {
-        text: "お人間さん。それは音楽やライブと関係がありますか？",
-        characteristic: "other_features",
-        yesValue: "音楽・ライブ",
-        noValue: (val) => !val.includes("音楽・ライブ")
-    },
-    {
-        text: "お人間さん。それはゲームですか？",
-        characteristic: "category",
-        yesValue: "ゲーム・作品",
-        noValue: (val) => !val.includes("ゲーム・作品")
-    },
-    {
-        text: "お人間さん。それは楽器ですか？",
-        characteristic: "category",
-        yesValue: "楽器",
-        noValue: (val) => !val.includes("楽器")
-    },
-    {
-        text: "お人間さん。それはスポーツ用品ですか？",
-        characteristic: "category",
-        yesValue: "スポーツ用品",
-        noValue: (val) => !val.includes("スポーツ用品")
-    },
-    {
-        text: "お人間さん。それは文房具ですか？",
-        characteristic: "category",
-        yesValue: "文房具",
-        noValue: (val) => !val.includes("文房具")
-    },
-    {
-        text: "お人間さん。それは家電ですか？",
-        characteristic: "category",
-        yesValue: "家電",
-        noValue: (val) => !val.includes("家電")
-    },
-    {
-        text: "お人間さん。それは植物ですか？",
-        characteristic: "category",
-        yesValue: "植物",
-        noValue: (val) => !val.includes("植物")
-    },
-    {
-        text: "お人間さん。それは飲料ですか？",
-        characteristic: "category",
-        yesValue: "飲料",
-        noValue: (val) => !val.includes("飲料")
-    },
-    {
-        text: "お人間さん。それは本ですか？",
-        characteristic: "category",
-        yesValue: "本",
-        noValue: (val) => !val.includes("本")
-    },
-    {
-        text: "お人間さん。それはペットですか？",
-        characteristic: "purpose",
-        yesValue: "ペット",
-        noValue: (val) => !val.includes("ペット")
-    },
-    {
-        text: "お人間さん。それは四足歩行ですか？",
-        characteristic: "other_features",
-        yesValue: "四足歩行",
-        noValue: (val) => !val.includes("四足歩行")
-    },
-    {
-        text: "お人間さん。それは鳴きますか？",
-        characteristic: "other_features",
-        yesValue: "鳴く",
-        noValue: (val) => !val.includes("鳴く")
-    },
-    {
-        text: "お人間さん。それは施設や建物さんですか？",
-        characteristic: "category",
-        yesValue: "施設",
-        noValue: (val) => !val.includes("施設")
-    }
-];
 
 const sequentialQuestions = [
     {
