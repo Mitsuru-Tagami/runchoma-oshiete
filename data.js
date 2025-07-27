@@ -426,7 +426,6 @@ const items = [
       "other_features": ["研究", "学術的"],
       "book_type": "専門書"
     }
-  }
   },
   {
     "name": "図書館",
