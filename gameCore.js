@@ -1,6 +1,6 @@
 import { loadItemsFromLocalStorage, getActiveItems, setActiveItems, addNewItem } from './dataManager.js';
 import { findNextQuestion, resetUsedQuestions, setCurrentContext, getSpecificQuestions } from './questionSelector.js';
-import { uiElements, setupInitialUI, askQuestion, displayCandidates, showAkinatorLink, toggleDarkMode } from './ui.js';
+import { uiElements, setupInitialUI, askQuestion, displayCandidates, showAkinatorLink, toggleDarkMode } from './ui.js?v=1';
 import { setButtonsEnabled, restartGame } from './utils.js';
 
 // --- ゲーム状態管理 ---
