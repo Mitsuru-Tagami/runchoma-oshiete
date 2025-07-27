@@ -100,9 +100,7 @@ export function showAkinatorLink() {
 
 // 初期画面表示
 export function setupInitialUI() {
-    uiElements.messageElement.textContent = `お人間さん。頭に思い浮かべたソレは、何か形のあるモノですか？
-それとも概念やサービスでしょうか？
-はたまた芸能人やキャラクタでしょうか？`;
+    uiElements.messageElement.textContent = `お人間さん。頭に思い浮かべたソレは、何か形のあるモノですか？　それとも概念やサービスでしょうか？　はたまた芸能人やキャラクタでしょうか？`;
     uiElements.initialSelectionButtons.style.display = 'grid';
     uiElements.mainQuestionButtons.style.display = 'none';
     uiElements.candidateSelectionArea.style.display = 'none';
