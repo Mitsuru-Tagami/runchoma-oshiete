@@ -175,7 +175,13 @@ export function handleInitialAnswer(type) {
         showAkinatorLink();
         gameState.isProcessing = false;
     } else {
-        let activeItems = getActiveItems().filter(item => item.characteristics.type === type);
+        let activeItems = getActiveItems().filter(item => {
+            if (Array.isArray(item.characteristics.type)) {
+                return item.characteristics.type.includes(type);
+            } else {
+                return item.characteristics.type === type;
+            }
+        });
         setActiveItems(activeItems);
         // console.log("フィルタリング後のactiveItems:", activeItems);
 
