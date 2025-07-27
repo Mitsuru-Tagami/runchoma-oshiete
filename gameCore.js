@@ -1,6 +1,6 @@
 import { loadItemsFromLocalStorage, getActiveItems, setActiveItems, addNewItem } from './dataManager.js';
 import { findNextQuestion, resetUsedQuestions, setCurrentContext, getSpecificQuestions } from './questionSelector.js';
-import { uiElements, setupInitialUI, askQuestion, displayCandidates, showAkinatorLink, toggleDarkMode } from './ui.js?v=2';
+import { uiElements, setupInitialUI, askQuestion, displayCandidates, showAkinatorLink, toggleDarkMode } from './ui.js';
 import { setButtonsEnabled, restartGame } from './utils.js';
 
 // --- ゲーム状態管理 ---
@@ -175,13 +175,7 @@ export function handleInitialAnswer(type) {
         showAkinatorLink();
         gameState.isProcessing = false;
     } else {
-        let activeItems = getActiveItems().filter(item => {
-            if (Array.isArray(item.characteristics.type)) {
-                return item.characteristics.type.includes(type);
-            } else {
-                return item.characteristics.type === type;
-            }
-        });
+        let activeItems = getActiveItems().filter(item => item.characteristics.type === type);
         setActiveItems(activeItems);
         // console.log("フィルタリング後のactiveItems:", activeItems);
 
