@@ -426,16 +426,6 @@ const items = [
       "other_features": ["研究", "学術的"],
       "book_type": "専門書"
     }
-  },
-  {
-    "name": "図書館",
-    "characteristics": {
-      "type": ["モノ", "サービス"],
-      "category": ["施設", "公共サービス", "本"],
-      "purpose": ["本を借りる", "本を読む", "勉強する", "情報収集"],
-      "other_features": ["静か", "本がたくさんある", "無料で利用できる", "現実世界で利用"],
-      "game_type": "なし"
-    }
   }
 ];
 
