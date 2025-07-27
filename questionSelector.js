@@ -3,10 +3,16 @@ import { calculateEntropy } from './utils.js';
 // 質問の定義
 const randomQuestions = [
     {
-        text: "お人間さん。それは生き物さんですか？",
-        characteristic: "living",
-        yesValue: "はい",
-        noValue: "いいえ"
+        text: "お人間さん。それは施設や建物さんですか？",
+        characteristic: "category",
+        yesValue: "施設",
+        noValue: (val) => !val.includes("施設")
+    },
+    {
+        text: "お人間さん。それは本を借りられますか？",
+        characteristic: "purpose",
+        yesValue: "本を借りる",
+        noValue: (val) => !val.includes("本を借りる")
     },
     {
         text: "お人間さん。それは乗り物さんですか？",
