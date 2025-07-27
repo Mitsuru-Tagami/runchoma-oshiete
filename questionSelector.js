@@ -20,6 +20,7 @@ const randomQuestions = [
         yesValue: "本を借りる",
         noValue: (val) => !val.includes("本を借りる")
     },
+];
 
 const sequentialQuestions = [
     {
