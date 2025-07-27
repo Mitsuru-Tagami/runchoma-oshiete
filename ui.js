@@ -38,9 +38,17 @@ export function askQuestion(questionText, setButtonsEnabledCallback, setProcessi
 }
 
 // 最終特定結果を表示する関数
+import { getActiveItems } from './dataManager.js';
+
 export function displayFinalResult(itemName, setButtonsEnabledCallback) {
-    // console.log("最終特定結果を表示: ", itemName);
-    uiElements.messageElement.textContent = `お人間さん！るんちょま、見つけましたよ！お探しのお品さんは、『${itemName}』ですね、えっへん。`;
+    const identifiedItem = getActiveItems().find(item => item.name === itemName);
+    let message = `お人間さん！るんちょま、見つけましたよ！お探しのお品さんは、『${itemName}』ですね、えっへん。`;
+
+    if (identifiedItem && (identifiedItem.characteristics.category.includes('本') || identifiedItem.characteristics.book_type)) {
+        message += `\nるんちょまは各題名はわかりかねますので、詳細は<a href="https://ndlsearch.ndl.go.jp/" target="_blank">NDLサーチ</a>で検索をお願いします。`;
+    }
+
+    uiElements.messageElement.innerHTML = message.replace(/\n/g, '<br>');
     uiElements.initialSelectionButtons.style.display = 'none';
     uiElements.mainQuestionButtons.style.display = 'none';
     uiElements.candidateSelectionArea.style.display = 'none';
