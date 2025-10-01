@@ -1,7 +1,7 @@
 // src/data/dataManager.js
 
-import { items as initialItems } from './localData.js'; // Renamed from data.js
-import { loadItemsFromSpreadsheet, addNewItemToSpreadsheet } from './spreadsheetClient.js';
+import { items as initialItems } from './localData.js';
+import * as spreadsheetClient from './spreadsheetClient.cjs';
 
 let activeItems = [];
 
@@ -28,7 +28,7 @@ export async function loadItems() {
     let loadedItems = [];
 
     if (currentDataSourceType === 'spreadsheet') {
-        loadedItems = await loadItemsFromSpreadsheet();
+        loadedItems = await spreadsheetClient.loadItemsFromSpreadsheet();
     } else { // Default to local
         const storedItems = localStorage.getItem('runchomaItems');
         const combinedItems = [...initialItems];
@@ -62,7 +62,7 @@ export async function saveItems(itemsToSave) {
     if (currentDataSourceType === 'spreadsheet') {
         // スプレッドシートへの保存は、新しいアイテムの追加時のみを想定
         // ここでは、最後にactiveItemsに追加されたアイテムを保存する
-        await addNewItemToSpreadsheet(items[items.length - 1]); 
+        await spreadsheetClient.addNewItemToSpreadsheet(items[items.length - 1]); 
     } else { // Default to local
         localStorage.setItem('runchomaItems', JSON.stringify(items));
     }
@@ -79,7 +79,7 @@ export async function addNewItem(newItem) {
         activeItems.push({ ...newItem, score: 0 });
         console.log(`新しいアイテム「${newItem.name}」を追加しました。`);
     }
-    await saveItems(activeItems); // Use await here
+    await saveItems(activeItems);
 }
 
 export function getActiveItems() {

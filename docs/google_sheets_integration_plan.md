@@ -100,3 +100,53 @@ JavaScriptから直接Googleスプレッドシートを操作するのではな�
           // エラーが発生したときの処理など
         });
         ```
+### ステップ4：根本解決！ (フロントエンドとバックエンドの分離リファクタリング)
+
+**※ここまでのデバッグで、フロントエンド（ブラウザで動くコード）が、バックエンド（サーバーで動くNode.jsのコード）を直接読み込もうとしている、という根本的な問題が判明しました。これを解決しない限り、エラーが再発し続けます。**
+
+#### 目的
+
+-   フロントエンドとバックエンドのコードを完全に分離し、それぞれが自身の役割に集中できるようにする。
+-   ブラウザはUIの表示とユーザー操作の受付に専念する。
+-   サーバーはデータ処理、ロジック、外部連携（スプレッドシート等）に専念する。
+-   両者の通信は、すべて`server.js`に定義されたAPIエンドポイントを通じて行う。
+
+#### 実装のステップ
+
+1.  **APIエンドポイントの設計と実装 (`server.js`)**
+    -   フロントエンドが必要とするすべての操作に対応するAPIを`server.js`に作成します。
+    -   例：
+        -   `GET /api/game/start`: ゲームの初期状態（最初の質問など）を取得する。
+        -   `POST /api/game/answer`: ユーザーの回答をサーバーに送信し、次の質問を受け取る。
+        -   `POST /api/game/learn`: ユーザーが教えた新しい答えをサーバーに送信し、保存処理を依頼する。
+
+2.  **バックエンドロジックの集約 (`server.js` と `src/` 内モジュール)**
+    -   作成したAPIエンドポイントの内部で、`dataManager.js`や`questionSelector.js`などの既存ロジックを呼び出します。
+    -   `process.env`の読み取りやデータソースの切り替えなど、サーバー側でしかできない処理は、すべてこのバックエンド層で完結させます。
+
+3.  **フロントエンドのリファクタリング (`public/` 内のJSファイル)**
+    -   `public/`ディレクトリ内のJavaScriptファイル（`gameCore.js`など）を修正します。
+    -   `src/`ディレクトリ内のモジュール（`dataManager`など）への`import`文をすべて削除します。
+    -   代わりに、上で作成したAPIエンドポイントに対して`fetch`リクエストを送信するコードに置き換えます。
+    -   **例 (`gameCore.js` の修正イメージ):**
+        ```javascript
+        // 修正前 (NG)
+        // import { findNextQuestion } from '../core/questionSelector.js';
+        // const nextQuestion = findNextQuestion(...);
+
+        // 修正後 (OK)
+        async function handleAnswer(answer) {
+          const response = await fetch('/api/game/answer', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ answer: answer })
+          });
+          const data = await response.json();
+          const nextQuestion = data.nextQuestion;
+          // ... 画面を更新 ...
+        }
+        ```
+
+4.  **動作確認**
+    -   すべての改修が終わった後、ブラウザで実際にゲームをプレイし、すべての機能（質問への回答、候補の表示、新しい答えの学習）が正しく動作することを確認します。
+    -   特に、新しい答えを学習させた際に、Cloud Function経由でスプレッドシートにデータが書き込まれることを最終確認します。

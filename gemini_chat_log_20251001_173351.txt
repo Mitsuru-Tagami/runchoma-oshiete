@@ -1,0 +1,28 @@
+今日の目標:
+るんちょまアプリのGoogleスプレッドシート連携を実装し、特にフロントエンドからのデータ書き込みを可能にする。
+
+実施した作業:
+1.  `spreadsheetClient.js` の修正: Cloud Function経由でスプレッドシートにデータを書き込むように変更。
+2.  テスト環境の整備:
+    *   `git pull` の競合を解決。
+    *   Jestのテスト設定の重複を解消。
+    *   新しいテストファイル `dataManager.test.mjs` を作成し、古い `dataManager.test.js` を削除。
+3.  フロントエンドとバックエンドの分離リファクタリング:
+    *   ブラウザでNode.jsのコードが実行される問題を解決するため、`server.js` にAPIエンドポイント (`/api/game/start`, `/api/game/answer`, `/api/game/learn`) を実装。
+    *   `gameCore.js` を修正し、これらのAPIを `fetch` で呼び出す純粋なフロントエンドモジュールに変換。
+    *   `questionSelector.js` の `utils.js` へのインポートパスを修正。
+    *   `index.html` にキャッシュ対策のバージョンパラメータを追加。
+4.  スプレッドシート認証情報の管理:
+    *   `dotenv` ライブラリを導入し、`.env` ファイルから環境変数を読み込む方式に変更。
+    *   `spreadsheetClient.js` を修正し、`GOOGLE_CLIENT_EMAIL`、`GOOGLE_PROJECT_ID`、`GOOGLE_PRIVATE_KEY_PATH` を個別の環境変数として読み込み、`private_key.pem` ファイルからプライベートキーを読み込むように変更。
+    *   `private_key.pem` ファイルをプロジェクトルートに作成。
+
+現在の問題点:
+1.  現象: アプリ起動時、カテゴリ選択後に「そのカテゴリのお品さんは、るんちょまの知識にはまだないようです…」と表示され、ゲームが進行しない。
+2.  サーバーログのエラー: `Error: 環境変数 GOOGLE_APPLICATION_CREDENTIALS_JSON が設定されていません。`
+3.  原因:
+    *   `spreadsheetClient.js` は `GOOGLE_CLIENT_EMAIL` などの個別の環境変数を参照するように修正済み。
+    *   `.env` ファイルもこれらの個別の環境変数を設定するように修正済み。
+    *   しかし、サーバーログには依然として古い環境変数名 (`GOOGLE_APPLICATION_CREDENTIALS_JSON`) が設定されていないというエラーが出力されている。
+    *   これは、サーバーが最新の `server.js` を実行していない、または `dotenv` が `.env` ファイルを正しく読み込めていない、または `spreadsheetClient.js` が古いコードのまま実行されている 可能性が高い。
+    *   特に、`pkill -f "node server.js"` でNode.jsプロセスを強制終了し、サーバーを再起動しても問題が解消されないため、サーバーの起動プロセス自体に何らかの根本的な問題がある可能性が考えられる。

@@ -61,7 +61,7 @@ export function displayCandidates(activeItems, setButtonsEnabledCallback, setPro
         }
     });
 
-    const topCandidates = maxScore < 1 ? [] : activeItems.filter(item => item.score === maxScore);
+    const topCandidates = activeItems.filter(item => item.score === maxScore);
 
     // console.log("上位候補:", topCandidates);
 
