@@ -1,4 +1,4 @@
-import { calculateEntropy } from './utils.js';
+import { calculateEntropy } from '../../public/utils.js';
 
 // 質問の定義
 const randomQuestions = [
@@ -338,6 +338,7 @@ function findRandomQuestion(activeItems) {
     let bestQuestionIndexInRandomPool = -1;
 
     const currentEntropy = calculateEntropy(activeItems);
+    console.log('Current Entropy:', currentEntropy);
 
     availableQuestions.forEach((question, indexInAvailable) => {
         const originalIndex = randomQuestions.indexOf(question); // Get original index to mark as used
@@ -346,6 +347,7 @@ function findRandomQuestion(activeItems) {
 
         activeItems.forEach(item => {
             const charValue = item.characteristics[question.characteristic];
+            console.log(`  Item: ${item.name}, Characteristics:`, item.characteristics, `Question Characteristic: ${question.characteristic}, charValue:`, charValue);
             if (charValue === undefined || charValue === null || charValue === "不明" || (Array.isArray(charValue) && charValue.length === 0)) {
                 return;
             }
@@ -367,6 +369,8 @@ function findRandomQuestion(activeItems) {
                 noItems.push(item);
             }
         });
+
+        console.log(`Question: "${question.text}", Yes items: ${yesItems.length}, No items: ${noItems.length}`);
 
         if (yesItems.length === 0 || noItems.length === 0) {
             return; // Skip questions that don't split the data
@@ -428,9 +432,9 @@ function findContextualQuestion(activeItems) {
 }
 
 export function findNextQuestion(activeItems, currentQuestionPhase) {
-    console.log(`--- findNextQuestion 開始 (フェーズ: ${currentQuestionPhase}) ---`);
-
     if (currentQuestionPhase === 'RANDOM_PHASE') {
+        console.log('--- findRandomQuestion 開始 ---');
+        console.log('activeItems for findRandomQuestion:', activeItems);
         return findRandomQuestion(activeItems);
     } else if (currentQuestionPhase === 'SEQUENTIAL_PHASE') {
         return findSequentialQuestion(activeItems);
