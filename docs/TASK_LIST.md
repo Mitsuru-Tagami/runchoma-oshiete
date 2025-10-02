@@ -32,6 +32,17 @@
     - [memo] DB連携前に、既存の学習フローやデータ管理のテスト・自動化を優先すること。これにより、DB連携時の不具合切り分けや回帰テストが容易になる。
     - [memo] テスト自動化が整っていれば、DB連携後も安心して機能追加・修正ができる。
 
+- [x] **DB実装（今後予定）**
+    - [x] Google Cloud Platformでサービスアカウントを作成する。
+    - [ ] サービスアカウントを利用してGoogleスプレッドシートを新規作成し、簡易DBとして利用する。
+    - [ ] Google Sheets API連携部分の設計・実装。
+    - [ ] DB連携部分のテスト・運用フローの整備。
+    - [memo] Google Sheets API連携には、Google Cloud PlatformでのAPI有効化・認証情報取得・`googleapis`ライブラリ導入などが必要。
+    - [memo] 個人・小規模用途ならGoogleスプレッドシートの無料枠（1シート1000万セル、API呼び出し1日10万回程度）で十分運用可能。
+    - [memo] 保存したい情報（data.jsの内容やユーザー入力）は、API経由でシートに書き込む関数を`dataManager.js`等に追加し、保存タイミングを設計する。
+    - [ ] **現在取り組んでいること:** Google Cloud RunへのNode.jsプログラムのデプロイ。
+    - [ ] **現在の問題点:** Cloud Runサービスが起動しない。`SyntaxError: "undefined" is not valid JSON`エラーが発生しており、`GOOGLE_APPLICATION_CREDENTIALS_JSON`環境変数の値が正しく読み込まれていない可能性が高い。JSONキーファイルをシークレットとしてアップロードする方法を試しているが、まだ解決に至っていない。
+
 ---
 ### タスク: 運用形態切り替え機能の実装
 

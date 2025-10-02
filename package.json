@@ -21,6 +21,9 @@
   "devDependencies": {
     "jest": "^30.0.4"
   },
+  "jest": {
+    "testEnvironment": "node"
+  },
   "dependencies": {
     "dotenv": "^17.2.3",
     "express-session": "^1.18.2",

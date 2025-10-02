@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>るんちょまの『教えて下さい、お人間さん』</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    
+</head>
+<body>
+    <div class="container">
+        <header>
+            <!-- ロゴ or イラストが入ります -->
+            <h1>るんちょまの『教えて下さい、お人間さん』</h1>
+        </header>
+        <main>
+            <section class="message-area">
+                <p id="message">お人間さん。お探しのお品さんは、モノですか？　サービスですか？　それとも人物やキャラさんですか？</p>
+            </section>
+            
+            <!-- 最初の質問用ボタン -->
+            <section class="button-area" id="initial-selection-buttons">
+                <button id="btn-select-mono">モノです</button>
+                <button id="btn-select-service">サービスです</button>
+                <button id="btn-select-person-char">人物やキャラです</button>
+            </section>
+
+            <!-- 通常の質問用ボタン -->
+            <section class="button-area" id="main-question-buttons" style="display:none;">
+                <button id="btn-yes">はい、そうです！</button>
+                <button id="btn-no">いいえ、違います！</button>
+                <button id="btn-unknown">うーん、分かりません…</button>
+            </section>
+
+            <section class="candidate-area" id="candidate-selection" style="display:none;">
+                <p id="candidate-message">お人間さん。もしかして、お探しのお品さんは、この中にいらっしゃいますか？</p>
+                <div id="candidate-list" class="button-grid"></div>
+                <button id="btn-not-in-list">いいえ、この中にはいらっしゃいません…</button>
+            </section>
+            <section class="input-answer-area" id="input-answer-area" style="display:none;">
+                <input type="text" id="user-answer-input" placeholder="お品さんの名前を入力してください" />
+                <button id="btn-submit-answer">るんちょまに教える</button>
+                <button id="btn-restart-game">もう一度遊ぶ</button>
+            </section>
+            <section class="akinator-link-area" id="akinator-link-area" style="display:none;">
+                <p>お人間さん、人物やキャラをお探しなのですね！</p>
+                <p>るんちょまはまだそこまで詳しくないのです…。</p>
+                <p>よろしければ、こちらのサービスをご利用くださいな。</p>
+                <a href="https://jp.akinator.com/" target="_blank" class="akinator-button">アキネーターで探す</a>
+                <button id="btn-start-over">もう一度遊ぶ</button>
+            </section>
+        </main>
+        <footer>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSf5d4vTg5Ib6zCdlOGhrIM6d14bDy1kebo5TXVXRBNGc3OLwA/viewform?usp=header" id="report-link" target="_blank">問題点を報告する</a>
+            <button id="btn-show-readme">遊び方</button>
+            <button id="dark-mode-toggle">🌙</button>
+        </footer>
+    </div>
+
+    <div id="readme-display-area" style="display:none;">
+        <!-- README.md の内容がここに読み込まれます -->
+    </div>
+
+    <script type="module" src="./gameCore.js"></script>
+</body>
+</html>

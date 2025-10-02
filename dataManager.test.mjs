@@ -1,4 +1,4 @@
-import { addNewItem, setDataSource, getActiveItems, setActiveItems } from './src/data/dataManager.js';
+import { addNewItem, loadItemsFromLocalStorage, setDataSource, getActiveItems, setActiveItems } from './src/data/dataManager.js';
 import { jest } from '@jest/globals';
 
 // Mock fetch
@@ -12,16 +12,25 @@ global.localStorage = {
   clear: () => { store = {}; }
 };
 
-describe('dataManager with Cloud Function', () => {
-
+describe('dataManager with Cloud Function and Local Storage', () => { // テストスイート名を統合
   beforeEach(() => {
-    // Reset mocks and data before each test
-    fetch.mockClear();
+    fetch.mockClear(); // リモートの変更
     store = {};
     setActiveItems([]);
   });
 
-  test('addNewItem should call fetch with correct data when dataSource is "spreadsheet"', async () => {
+  test('猫を学習し、保存・再ロード後も特定できる (Local Storage)', () => { // ローカルのテスト
+    // 猫を追加
+    const neko = { name: '猫', characteristics: { type: 'モノ', living: 'はい' } };
+    addNewItem(neko);
+    // 保存後に再ロード
+    const items = loadItemsFromLocalStorage();
+    const nekoItem = items.find(item => item.name === '猫');
+    expect(nekoItem).toBeDefined();
+    expect(nekoItem.characteristics.living).toBe('はい');
+  });
+
+  test('addNewItem should call fetch with correct data when dataSource is "spreadsheet"', async () => { // リモートのテスト
     // Arrange
     const cloudFunctionUrl = 'https://asia-northeast1-runchoma-oshiete-db.cloudfunctions.net/add-sheet-row';
     const newItem = { name: 'テスト', characteristics: { a: 'b' } };
