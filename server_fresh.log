@@ -1,0 +1,77 @@
+Server running on http://localhost:3000
+データソースが spreadsheet に設定されました。
+--- loadItems 開始 (データソース: spreadsheet) ---
+スプレッドシートからデータを読み込み中...
+スプレッドシートからのアイテム読み込みに失敗しました: Error: 環境変数 GOOGLE_APPLICATION_CREDENTIALS_JSON が設定されていません。
+    at getDoc (file:///home/wanderingdj/gemini-cli/runchoma-oshiete/src/data/spreadsheetClient.js:17:11)
+    at loadItemsFromSpreadsheet (file:///home/wanderingdj/gemini-cli/runchoma-oshiete/src/data/spreadsheetClient.js:35:23)
+    at loadItems (file:///home/wanderingdj/gemini-cli/runchoma-oshiete/src/data/dataManager.js:31:29)
+    at file:///home/wanderingdj/gemini-cli/runchoma-oshiete/server.js:38:11
+    at Layer.handleRequest (/home/wanderingdj/gemini-cli/node_modules/router/lib/layer.js:152:17)
+    at next (/home/wanderingdj/gemini-cli/node_modules/router/lib/route.js:157:13)
+    at Route.dispatch (/home/wanderingdj/gemini-cli/node_modules/router/lib/route.js:117:3)
+    at handle (/home/wanderingdj/gemini-cli/node_modules/router/index.js:435:11)
+    at Layer.handleRequest (/home/wanderingdj/gemini-cli/node_modules/router/lib/layer.js:152:17)
+    at /home/wanderingdj/gemini-cli/node_modules/router/index.js:295:15
+統合後のactiveItems: []
+--- loadItems 終了 ---
+--- loadItems 開始 (データソース: spreadsheet) ---
+スプレッドシートからデータを読み込み中...
+スプレッドシートからのアイテム読み込みに失敗しました: Error: 環境変数 GOOGLE_APPLICATION_CREDENTIALS_JSON が設定されていません。
+    at getDoc (file:///home/wanderingdj/gemini-cli/runchoma-oshiete/src/data/spreadsheetClient.js:17:11)
+    at loadItemsFromSpreadsheet (file:///home/wanderingdj/gemini-cli/runchoma-oshiete/src/data/spreadsheetClient.js:35:23)
+    at loadItems (file:///home/wanderingdj/gemini-cli/runchoma-oshiete/src/data/dataManager.js:31:29)
+    at file:///home/wanderingdj/gemini-cli/runchoma-oshiete/server.js:38:11
+    at Layer.handleRequest (/home/wanderingdj/gemini-cli/node_modules/router/lib/layer.js:152:17)
+    at next (/home/wanderingdj/gemini-cli/node_modules/router/lib/route.js:157:13)
+    at Route.dispatch (/home/wanderingdj/gemini-cli/node_modules/router/lib/route.js:117:3)
+    at handle (/home/wanderingdj/gemini-cli/node_modules/router/index.js:435:11)
+    at Layer.handleRequest (/home/wanderingdj/gemini-cli/node_modules/router/lib/layer.js:152:17)
+    at /home/wanderingdj/gemini-cli/node_modules/router/index.js:295:15
+統合後のactiveItems: []
+--- loadItems 終了 ---
+--- loadItems 開始 (データソース: spreadsheet) ---
+スプレッドシートからデータを読み込み中...
+スプレッドシートからのアイテム読み込みに失敗しました: Error: 環境変数 GOOGLE_APPLICATION_CREDENTIALS_JSON が設定されていません。
+    at getDoc (file:///home/wanderingdj/gemini-cli/runchoma-oshiete/src/data/spreadsheetClient.js:17:11)
+    at loadItemsFromSpreadsheet (file:///home/wanderingdj/gemini-cli/runchoma-oshiete/src/data/spreadsheetClient.js:35:23)
+    at loadItems (file:///home/wanderingdj/gemini-cli/runchoma-oshiete/src/data/dataManager.js:31:29)
+    at file:///home/wanderingdj/gemini-cli/runchoma-oshiete/server.js:38:11
+    at Layer.handleRequest (/home/wanderingdj/gemini-cli/node_modules/router/lib/layer.js:152:17)
+    at next (/home/wanderingdj/gemini-cli/node_modules/router/lib/route.js:157:13)
+    at Route.dispatch (/home/wanderingdj/gemini-cli/node_modules/router/lib/route.js:117:3)
+    at handle (/home/wanderingdj/gemini-cli/node_modules/router/index.js:435:11)
+    at Layer.handleRequest (/home/wanderingdj/gemini-cli/node_modules/router/lib/layer.js:152:17)
+    at /home/wanderingdj/gemini-cli/node_modules/router/index.js:295:15
+統合後のactiveItems: []
+--- loadItems 終了 ---
+--- loadItems 開始 (データソース: spreadsheet) ---
+スプレッドシートからデータを読み込み中...
+スプレッドシートからのアイテム読み込みに失敗しました: Error: 環境変数 GOOGLE_APPLICATION_CREDENTIALS_JSON が設定されていません。
+    at getDoc (file:///home/wanderingdj/gemini-cli/runchoma-oshiete/src/data/spreadsheetClient.js:17:11)
+    at loadItemsFromSpreadsheet (file:///home/wanderingdj/gemini-cli/runchoma-oshiete/src/data/spreadsheetClient.js:35:23)
+    at loadItems (file:///home/wanderingdj/gemini-cli/runchoma-oshiete/src/data/dataManager.js:31:29)
+    at file:///home/wanderingdj/gemini-cli/runchoma-oshiete/server.js:38:11
+    at Layer.handleRequest (/home/wanderingdj/gemini-cli/node_modules/router/lib/layer.js:152:17)
+    at next (/home/wanderingdj/gemini-cli/node_modules/router/lib/route.js:157:13)
+    at Route.dispatch (/home/wanderingdj/gemini-cli/node_modules/router/lib/route.js:117:3)
+    at handle (/home/wanderingdj/gemini-cli/node_modules/router/index.js:435:11)
+    at Layer.handleRequest (/home/wanderingdj/gemini-cli/node_modules/router/lib/layer.js:152:17)
+    at /home/wanderingdj/gemini-cli/node_modules/router/index.js:295:15
+統合後のactiveItems: []
+--- loadItems 終了 ---
+--- loadItems 開始 (データソース: spreadsheet) ---
+スプレッドシートからデータを読み込み中...
+スプレッドシートからのアイテム読み込みに失敗しました: Error: 環境変数 GOOGLE_APPLICATION_CREDENTIALS_JSON が設定されていません。
+    at getDoc (file:///home/wanderingdj/gemini-cli/runchoma-oshiete/src/data/spreadsheetClient.js:17:11)
+    at loadItemsFromSpreadsheet (file:///home/wanderingdj/gemini-cli/runchoma-oshiete/src/data/spreadsheetClient.js:35:23)
+    at loadItems (file:///home/wanderingdj/gemini-cli/runchoma-oshiete/src/data/dataManager.js:31:29)
+    at file:///home/wanderingdj/gemini-cli/runchoma-oshiete/server.js:38:11
+    at Layer.handleRequest (/home/wanderingdj/gemini-cli/node_modules/router/lib/layer.js:152:17)
+    at next (/home/wanderingdj/gemini-cli/node_modules/router/lib/route.js:157:13)
+    at Route.dispatch (/home/wanderingdj/gemini-cli/node_modules/router/lib/route.js:117:3)
+    at handle (/home/wanderingdj/gemini-cli/node_modules/router/index.js:435:11)
+    at Layer.handleRequest (/home/wanderingdj/gemini-cli/node_modules/router/lib/layer.js:152:17)
+    at /home/wanderingdj/gemini-cli/node_modules/router/index.js:295:15
+統合後のactiveItems: []
+--- loadItems 終了 ---
